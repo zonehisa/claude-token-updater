@@ -32,7 +32,7 @@ function showHelp(): void {
   log('  • GitHub CLIでログイン済み\n');
   
   log('詳細:', 'yellow');
-  log('  https://github.com/yourusername/claude-token-updater\n', 'cyan');
+  log('  https://github.com/zonehisa/claude-token-updater\n', 'cyan');
 }
 
 /**

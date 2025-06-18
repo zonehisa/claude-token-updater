@@ -98,4 +98,4 @@ MIT
 
 Issues、Pull Requestsは大歓迎です！
 
-https://github.com/yourusername/claude-token-updater
+https://github.com/zonehisa/claude-token-updater

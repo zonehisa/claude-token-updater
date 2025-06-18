@@ -34,12 +34,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yourusername/claude-token-updater.git"
+    "url": "git+https://github.com/zonehisa/claude-token-updater.git"
   },
   "bugs": {
-    "url": "https://github.com/yourusername/claude-token-updater/issues"
+    "url": "https://github.com/zonehisa/claude-token-updater/issues"
   },
-  "homepage": "https://github.com/yourusername/claude-token-updater#readme",
+  "homepage": "https://github.com/zonehisa/claude-token-updater#readme",
   "files": [
     "dist",
     "README.md",
