@@ -11,7 +11,7 @@ macOSのキーチェーンからClaude Codeの認証情報を安全に取得し�
 npxで直接実行できます：
 
 ```bash
-npx claude-token-updater
+npx ctup
 ```
 
 ## 必要な環境
@@ -35,7 +35,7 @@ macOSのキーチェーンからClaude Codeの認証情報を自動取得してG
 ### ヘルプ
 
 ```bash
-npx claude-token-updater --help
+npx ctup --help
 ```
 
 ## 更新されるGitHub Secrets
