@@ -1,0 +1,37 @@
+# Source files (only compiled dist/ is needed)
+src/
+tsconfig.json
+
+# Development files
+.gitignore
+.git/
+
+# Test files
+test/
+coverage/
+*.test.ts
+*.test.js
+*.spec.ts
+*.spec.js
+
+# Config files
+.prettierrc
+.eslintrc*
+.editorconfig
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+
+# Temporary files
+*.tmp
+*.temp
+.cache/
+
+# Example files
+*.example
+example-*

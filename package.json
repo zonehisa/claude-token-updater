@@ -1,0 +1,48 @@
+{
+  "name": "claude-token-updater",
+  "version": "1.0.0",
+  "description": "Claude Code GitHub Actions token updater - Update GitHub Secrets for Claude Code easily",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "bin": {
+    "claude-token-updater": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "start": "node dist/index.js",
+    "prepublishOnly": "npm run build",
+    "clean": "rm -rf dist"
+  },
+  "devDependencies": {
+    "@types/node": "^20.19.1",
+    "typescript": "^5.8.3"
+  },
+  "keywords": [
+    "claude",
+    "claude-code",
+    "github-actions",
+    "token",
+    "updater",
+    "cli"
+  ],
+  "author": "",
+  "license": "MIT",
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yourusername/claude-token-updater.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/claude-token-updater/issues"
+  },
+  "homepage": "https://github.com/yourusername/claude-token-updater#readme",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ]
+}
