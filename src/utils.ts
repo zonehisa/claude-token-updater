@@ -26,8 +26,8 @@ export function log(message: string, color: ConsoleColor = 'reset'): void {
  */
 export function showBanner(): void {
   log('\n╔═══════════════════════════════════════╗', 'cyan');
-  log('║     Claude Token Updater v1.0.0       ║', 'cyan');
-  log('║  Update GitHub Secrets for Claude Code ║', 'cyan');
+  log('║     Claude Token Updater v1.0.1       ║', 'cyan');
+  log('║ Update GitHub Secrets for Claude Code ║', 'cyan');
   log('╚═══════════════════════════════════════╝\n', 'cyan');
 }
 
