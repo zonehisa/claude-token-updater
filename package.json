@@ -6,7 +6,7 @@
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "bin": {
-    "claude-token-updater": "./dist/index.js"
+    "ctup": "./dist/index.js"
   },
   "scripts": {
     "build": "tsc && chmod +x dist/index.js",
