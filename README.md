@@ -39,7 +39,7 @@ npx --yes ctup
 ### 🎯 基本的な使い方
 
 ```bash
-npx claude-token-updater
+npx ctup
 ```
 
 macOSのキーチェーンからClaude Codeの認証情報を自動取得してGitHub Secretsを更新します。
