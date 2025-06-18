@@ -3,11 +3,21 @@ import type { GitHubSecrets } from './types.js';
 import { log } from './utils.js';
 
 /**
+ * シェルコマンドの値をエスケープ
+ */
+export function escapeShellArg(value: string): string {
+  // シングルクォートで囲み、内部のシングルクォートをエスケープ
+  return `'${value.replace(/'/g, "'\\''")}'`;
+}
+
+/**
  * GitHub Secretを更新
  */
 export function updateSecret(name: string, value: string): boolean {
   try {
-    execSync(`gh secret set ${name} --body "${value}"`, { stdio: 'inherit' });
+    // 値を安全にエスケープ
+    const escapedValue = escapeShellArg(value);
+    execSync(`gh secret set ${name} --body ${escapedValue}`, { stdio: 'inherit' });
     log(`✓ ${name} を更新しました`, 'green');
     return true;
   } catch (error) {

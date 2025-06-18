@@ -1,10 +1,15 @@
 # Source files (only compiled dist/ is needed)
 src/
-tsconfig.json
+*.ts
+!dist/**/*.ts
 
 # Development files
 .gitignore
 .git/
+.github/
+.claude/
+.vscode/
+.idea/
 
 # Test files
 test/
@@ -13,25 +18,80 @@ coverage/
 *.test.js
 *.spec.ts
 *.spec.js
+vitest.config.ts
+vitest.config.js
 
 # Config files
-.prettierrc
+tsconfig.json
+tsconfig.*.json
+.prettierrc*
 .eslintrc*
 .editorconfig
+.npmignore
+
+# Documentation (development only)
+CLAUDE.md
+TEST_REVIEW.md
+*.example.md
 
 # OS files
 .DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
 Thumbs.db
+.AppleDouble
+.LSOverride
+desktop.ini
+.directory
 
 # Logs
+logs/
 *.log
 npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
 
 # Temporary files
 *.tmp
 *.temp
 .cache/
+.parcel-cache/
+*.pid
+*.seed
+*.pid.lock
+
+# Build artifacts
+*.tsbuildinfo
+.tsc-cache/
+
+# Package manager files (except package.json)
+.npm
+.yarn-integrity
+.pnp.*
+yarn.lock
+pnpm-lock.yaml
+
+# Backup files
+*.bak
+*.backup
+*~
+
+# IDE files
+*.swp
+*.swo
 
 # Example files
 *.example
 example-*
+examples/
+
+# Misc
+.env
+.env.*
+.nyc_output/
+.vitest-cache/

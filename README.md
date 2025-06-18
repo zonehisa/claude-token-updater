@@ -14,6 +14,18 @@ npxで直接実行できます：
 npx ctup
 ```
 
+初回実行時は、npxがパッケージのダウンロードを確認します：
+```
+Need to install the following packages:
+  claude-token-updater@1.0.1
+Ok to proceed? (y) 
+```
+
+確認をスキップしたい場合：
+```bash
+npx --yes ctup
+```
+
 ## 必要な環境
 
 - **macOS** (必須)
