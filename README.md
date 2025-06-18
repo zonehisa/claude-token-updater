@@ -10,6 +10,12 @@ npxで直接実行できます：
 npx claude-token-updater
 ```
 
+## プラットフォーム対応
+
+- **macOS**: ✅ 自動モード（キーチェーン連携）、✅ 手動モード
+- **Windows**: ✅ 手動モード（自動的に切り替わります）
+- **Linux**: ✅ 手動モード（自動的に切り替わります）
+
 ## 使い方
 
 ### 🎯 自動モード（macOS限定）
@@ -20,13 +26,15 @@ npx claude-token-updater
 
 macOSのキーチェーンからClaude Codeの認証情報を自動取得してGitHub Secretsを更新します。
 
-### 📝 手動モード
+**注意**: 自動モードはmacOSのキーチェーンを使用するため、macOS専用です。Windows/Linuxでは自動的に手動モードに切り替わります。
+
+### 📝 手動モード（全プラットフォーム対応）
 
 ```bash
 npx claude-token-updater --manual
 ```
 
-JSONを貼り付けてトークンを更新します（全プラットフォーム対応）。
+JSONを貼り付けてトークンを更新します。Windows、Linux、macOSで利用可能です。
 
 ### 🌐 ブラウザヘルパー
 
@@ -57,18 +65,24 @@ npx claude-token-updater --help
 
 ## GitHub CLIのインストール
 
-### macOS
+### プラットフォーム別インストール方法
+
+**macOS (Homebrew)**
 ```bash
 brew install gh
 ```
 
-### Windows
+**Windows (winget)**
 ```bash
 winget install --id GitHub.cli
 ```
 
-### その他
-https://cli.github.com/
+**Linux (各ディストリビューション)**
+- Ubuntu/Debian: `sudo apt install gh`
+- Fedora: `sudo dnf install gh`
+- Arch: `sudo pacman -S github-cli`
+
+詳細: https://cli.github.com/
 
 ## トラブルシューティング
 
