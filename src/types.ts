@@ -29,8 +29,6 @@ export interface GitHubSecrets {
  * CLIのオプション型
  */
 export interface CLIOptions {
-  manual?: boolean;
-  browser?: boolean;
   help?: boolean;
   verbose?: boolean;
 }

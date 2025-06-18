@@ -1,7 +1,7 @@
 {
   "name": "claude-token-updater",
   "version": "1.0.0",
-  "description": "Claude Code GitHub Actions token updater - Update GitHub Secrets for Claude Code easily",
+  "description": "macOS Keychain integration for Claude Code GitHub Actions tokens",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -25,13 +25,18 @@
     "github-actions",
     "token",
     "updater",
-    "cli"
+    "cli",
+    "macos",
+    "keychain"
   ],
   "author": "",
   "license": "MIT",
   "engines": {
     "node": ">=16.0.0"
   },
+  "os": [
+    "darwin"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/zonehisa/claude-token-updater.git"

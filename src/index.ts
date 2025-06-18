@@ -3,8 +3,6 @@
 import type { CLIOptions } from './types.js';
 import { log, showBanner, isMacOS, checkGitHubCLI, checkGitHubAuth } from './utils.js';
 import { runAutoUpdate } from './auto-update.js';
-import { runManualUpdate } from './manual-update.js';
-import { showBrowserHelper } from './browser-helper.js';
 
 /**
  * ヘルプを表示
@@ -13,23 +11,24 @@ function showHelp(): void {
   showBanner();
   
   log('使用方法:', 'yellow');
-  log('  npx claude-token-updater              # 自動モード（macOSのみ）');
-  log('  npx claude-token-updater --manual     # 手動モード');
-  log('  npx claude-token-updater --browser    # ブラウザヘルパー');
-  log('  npx claude-token-updater --help       # このヘルプを表示\n');
+  log('  npx claude-token-updater      # キーチェーンから自動更新');
+  log('  npx claude-token-updater -h   # このヘルプを表示\n');
   
   log('説明:', 'yellow');
-  log('  Claude CodeのGitHub Actions用トークンを簡単に更新します。\n');
-  
-  log('モード:', 'yellow');
-  log('  • 自動モード: macOSのキーチェーンから自動取得（推奨）');
-  log('  • 手動モード: JSONを貼り付けて更新');
-  log('  • ブラウザヘルパー: ブラウザからトークンを取得する方法を表示\n');
+  log('  macOSのキーチェーンからClaude Codeの認証情報を取得し、');
+  log('  GitHub Actionsで使用するシークレットを自動更新します。\n');
   
   log('必要な環境:', 'yellow');
+  log('  • macOS');
   log('  • Node.js 16以上');
   log('  • GitHub CLI (gh)');
-  log('  • GitHub CLIでログイン済み\n');
+  log('  • GitHub CLIでログイン済み');
+  log('  • Claude Codeにログイン済み\n');
+  
+  log('更新されるシークレット:', 'yellow');
+  log('  • CLAUDE_ACCESS_TOKEN');
+  log('  • CLAUDE_REFRESH_TOKEN');
+  log('  • CLAUDE_EXPIRES_AT\n');
   
   log('詳細:', 'yellow');
   log('  https://github.com/zonehisa/claude-token-updater\n', 'cyan');
@@ -47,14 +46,6 @@ function parseOptions(args: string[]): CLIOptions {
       case '-h':
         options.help = true;
         break;
-      case '--manual':
-      case '-m':
-        options.manual = true;
-        break;
-      case '--browser':
-      case '-b':
-        options.browser = true;
-        break;
       case '--verbose':
       case '-v':
         options.verbose = true;
@@ -69,20 +60,27 @@ function parseOptions(args: string[]): CLIOptions {
  * 環境チェック
  */
 function checkEnvironment(): void {
+  // macOSチェック
+  if (!isMacOS()) {
+    log('✗ このツールはmacOS専用です', 'red');
+    log('\nmacOSのキーチェーン機能を使用してClaude Codeのトークンを', 'yellow');
+    log('安全に管理・更新します。\n', 'yellow');
+    process.exit(1);
+  }
+  
   // GitHub CLIチェック
   if (!checkGitHubCLI()) {
     log('✗ GitHub CLI (gh) がインストールされていません', 'red');
     log('\nインストール方法:', 'yellow');
-    log('  brew install gh              # macOS', 'cyan');
-    log('  winget install --id GitHub.cli  # Windows', 'cyan');
-    log('  https://cli.github.com/         # その他\n', 'cyan');
+    log('  brew install gh\n', 'cyan');
     process.exit(1);
   }
   
   // 認証チェック
   if (!checkGitHubAuth()) {
     log('✗ GitHub CLIが認証されていません', 'red');
-    log('実行: gh auth login', 'yellow');
+    log('\n以下のコマンドで認証してください:', 'yellow');
+    log('  gh auth login\n', 'cyan');
     process.exit(1);
   }
 }
@@ -104,30 +102,8 @@ async function main(): Promise<void> {
   checkEnvironment();
   
   try {
-    // モード選択
-    if (options.manual) {
-      // 手動モード
-      log('📝 手動モードで起動します...', 'blue');
-      await runManualUpdate();
-    } else if (options.browser) {
-      // ブラウザヘルパー
-      log('🌐 ブラウザヘルパーを表示します...', 'blue');
-      showBrowserHelper();
-    } else {
-      // 自動モード（デフォルト）
-      if (!isMacOS()) {
-        log('⚠️  自動モードはmacOSでのみ利用可能です', 'yellow');
-        log('\n他のプラットフォームでは手動モードを使用してください:', 'cyan');
-        log('  npx claude-token-updater --manual\n');
-        
-        // 手動モードにフォールバック
-        log('📝 手動モードに切り替えます...', 'blue');
-        await runManualUpdate();
-      } else {
-        log('🔑 キーチェーンから自動取得します...', 'blue');
-        await runAutoUpdate();
-      }
-    }
+    log('🔑 キーチェーンからClaude Codeの認証情報を取得します...', 'blue');
+    await runAutoUpdate();
   } catch (error) {
     // エラーは各モジュールで処理済み
     process.exit(1);

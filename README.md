@@ -1,6 +1,10 @@
 # claude-token-updater
 
-Claude CodeのGitHub Actions用トークンを簡単に更新するCLIツール
+macOS専用：Claude CodeのGitHub Actions用トークンをキーチェーンから自動更新するCLIツール
+
+## 概要
+
+macOSのキーチェーンからClaude Codeの認証情報を安全に取得し、GitHub Actionsで使用するSecretsを自動更新します。手動でトークンをコピー&ペーストする必要がなくなります。
 
 ## インストール不要！
 
@@ -10,15 +14,17 @@ npxで直接実行できます：
 npx claude-token-updater
 ```
 
-## プラットフォーム対応
+## 必要な環境
 
-- **macOS**: ✅ 自動モード（キーチェーン連携）、✅ 手動モード
-- **Windows**: ✅ 手動モード（自動的に切り替わります）
-- **Linux**: ✅ 手動モード（自動的に切り替わります）
+- **macOS** (必須)
+- Node.js 16以上
+- GitHub CLI (`gh`)がインストール済み
+- `gh auth login`で認証済み
+- Claude Codeにログイン済み
 
 ## 使い方
 
-### 🎯 自動モード（macOS限定）
+### 🎯 基本的な使い方
 
 ```bash
 npx claude-token-updater
@@ -26,36 +32,11 @@ npx claude-token-updater
 
 macOSのキーチェーンからClaude Codeの認証情報を自動取得してGitHub Secretsを更新します。
 
-**注意**: 自動モードはmacOSのキーチェーンを使用するため、macOS専用です。Windows/Linuxでは自動的に手動モードに切り替わります。
-
-### 📝 手動モード（全プラットフォーム対応）
-
-```bash
-npx claude-token-updater --manual
-```
-
-JSONを貼り付けてトークンを更新します。Windows、Linux、macOSで利用可能です。
-
-### 🌐 ブラウザヘルパー
-
-```bash
-npx claude-token-updater --browser
-```
-
-ブラウザの開発者ツールからトークンを取得する方法を表示します。
-
 ### ヘルプ
 
 ```bash
 npx claude-token-updater --help
 ```
-
-## 必要な環境
-
-- Node.js 16以上
-- GitHub CLI (`gh`)がインストール済み
-- `gh auth login`で認証済み
-- Claude Codeにログイン済み（自動モードの場合）
 
 ## 更新されるGitHub Secrets
 
@@ -65,22 +46,17 @@ npx claude-token-updater --help
 
 ## GitHub CLIのインストール
 
-### プラットフォーム別インストール方法
+macOSでGitHub CLIをインストールする方法：
 
-**macOS (Homebrew)**
+**Homebrew**
 ```bash
 brew install gh
 ```
 
-**Windows (winget)**
+**MacPorts**
 ```bash
-winget install --id GitHub.cli
+sudo port install gh
 ```
-
-**Linux (各ディストリビューション)**
-- Ubuntu/Debian: `sudo apt install gh`
-- Fedora: `sudo dnf install gh`
-- Arch: `sudo pacman -S github-cli`
 
 詳細: https://cli.github.com/
 
@@ -88,21 +64,32 @@ winget install --id GitHub.cli
 
 ### GitHub CLIの認証
 
+初回実行時は以下のコマンドでGitHub CLIの認証を行ってください：
+
 ```bash
 gh auth login
 ```
 
-### キーチェーンアクセスの許可（macOS）
+### キーチェーンアクセスの許可
 
-初回実行時はキーチェーンアクセスの許可が必要な場合があります。
+初回実行時はmacOSがキーチェーンアクセスの許可を求める場合があります。
+ダイアログが表示されたら「許可」をクリックしてください。
 
-### 手動モードへの切り替え
+### Claude Codeにログインしていない場合
 
-自動取得に失敗した場合は、手動モードを使用してください：
+このツールを使用する前に、Claude Code (https://claude.ai) にログインしている必要があります。
 
-```bash
-npx claude-token-updater --manual
-```
+## なぜmacOS専用？
+
+このツールはmacOSのキーチェーン機能を使用してClaude Codeの認証情報を安全に取得します。
+キーチェーンはmacOS固有の機能であるため、他のプラットフォームでは動作しません。
+
+Windows/Linux環境でClaude Codeのトークンを更新する場合は、手動で以下の手順を実行してください：
+
+1. ブラウザの開発者ツールを開く
+2. アプリケーション/ストレージからLocal Storageを確認
+3. `https://claude.ai`のエントリから`Claude Code-credentials`を探す
+4. 認証情報をGitHub Secretsに手動で設定
 
 ## ライセンス
 
